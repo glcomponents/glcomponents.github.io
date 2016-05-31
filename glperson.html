@@ -1,33 +1,17 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>GeoLink WebComponent Person</title>
-    <script src="/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="/components/glperson-element/glperson-element.html">
-</head>
-
-<body>
-
-</body>
-
-</html>
-
-
-<html>
-
-<head>
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-    <title>GeoLink WebComponent Person</title>
-    <script src="/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-    <link rel="import" href="/components/glperson-element/glperson-element.html">
     <!-- Material Design Lite -->
     <title>Catalog of Components</title>
     <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
     <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.deep_orange-orange.min.css">
     <!-- Material Design icon font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <!-- GeoLink Web component -->
+    <script src="/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+    <link rel="import" href="/components/glperson-element/glperson-element.html">
 </head>
 
 <body>
@@ -66,12 +50,15 @@
                 <div class="mdl-cell mdl-cell--6-col">
 
                     <h2>GeoLink WebComponent Person</h2>
-                    <p>For illustration I have placed a div around the componet and given it a solid black outline. This is to show the boundary of the component. </p>
-                    <div style="width:650px;border:2px solid black;margin-left:300px">
-                        <seed-element dataset='{"host": "Open Core Data",
-        "hosturl":"http://opencoredata.org",  "url": "http://opencoredata.org/id/dataset/650f47bb-9715-4f58-be51-0fab02af1b68"}'>
-                        </seed-element>
-                    </div>
+                    <p>A simple example of using web component approach to encapsulate GeoLink graph 
+                        information into an easy to instance element.  Such an element could be added
+                        to multiple pages to expose details on a resource that are outside of the 
+                        hosts data and mission but still of value to the audience.  </p>
+
+
+                    <glperson-element params='{"host": "GeoLink",
+        "hosturl":"http://data.geolink.org",  "url": "http://data.geolink.org/id/person/642b9126-6f35-4f67-8490-2ebe94541070"}'>
+                    </glperson-element>
 
                 </div>
             </div>
