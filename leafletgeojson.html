@@ -7,6 +7,12 @@
     <script src="/components/leaflet-element/bower_components/webcomponentsjs/webcomponents-lite.js"></script>
     <link rel="import" href="/components/leaflet-element/bower_components/leaflet-map/leaflet-map.html">
     <link rel="import" href="/components/leaflet-element/bower_components/iron-ajax/iron-ajax.html">
+    <!-- Material Design Lite -->
+    <title>Catalog of Components</title>
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.deep_orange-orange.min.css">
+    <!-- Material Design icon font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <style>
         html,
         body {
@@ -21,26 +27,62 @@
 </head>
 
 <body>
+    <!-- The drawer is always open in large screens. The header is always shown,
+      even in small screens. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-drawer
+                mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                      mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+              <!--<i class="material-icons">search</i>-->
+            </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" type="text" name="sample" id="fixed-header-drawer-exp">
+                    </div>
+                </div>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">GL Components</span>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/">Main Page</a>
+                <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
+                <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
+                <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
+                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet</a>
+                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet GeoJSON call</a>
+                <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
+            </nav>
+        </div>
+        <main class="mdl-layout__content">
+            <div class="page-content">
 
-    <div style="margin:100px;height:300px;width:550px">
-        <leaflet-map latitude="16.5" longitude="-80" zoom="3">
+                <div class="mdl-cell mdl-cell--6-col">
+                    <p>
+                        Explain page and ajax calls.
+                    </p>
 
+                </div>
 
-
-            <leaflet-tilelayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}" max-zoom="13">
-                Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri
-            </leaflet-tilelayer>
-
-            <template is="dom-bind">
+                <div style="margin:100px;height:300px;width:550px">
+                    <leaflet-map latitude="16.5" longitude="-80" zoom="3">
+                        <leaflet-tilelayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}" max-zoom="13">
+                            Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri
+                        </leaflet-tilelayer>
+                        <template is="dom-bind">
             <iron-ajax url="http://opencoredata.org/api/v1/spatial/expedition/165" auto last-response="{{data}}"></iron-ajax>
             <leaflet-geojson color="#FF0000" data="[[data]]"></leaflet-geojson>
         </template>
-        </leaflet-map>
+                    </leaflet-map>
+                </div>
+
+
+            </div>
+        </main>
     </div>
-
-
-
-
 </body>
 
 </html>
