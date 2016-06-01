@@ -59,7 +59,7 @@ Example:
                             <a target="_blank" href="{{dataset.url}}">{{dataset.url}}</a>
                             </h5>
                 <p><a target="_blank" href="{{dataset.hosturl}}" class="mdl-button">Dataset hosted by {{dataset.host}}</a></p>
-                <p> {{callGeoLinkPerson("Douglas Fils")}} </p>
+                <!--<p> {{callGeoLinkPerson("Douglas Fils")}} </p>-->
                 <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">
                     <a target="_blank" href="[[item.uri.value]]">[[item.uri.value]]</a>
                     <br/>
