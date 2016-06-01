@@ -35,8 +35,8 @@
                 <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
                 <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
                 <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
-                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet</a>
-                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet GeoJSON call</a>
+                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet Polygon</a>
+                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet IODP call</a>
                 <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
             </nav>
         </div>
@@ -44,31 +44,64 @@
             <div class="page-content">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
-                      <p>
-                      This catalog contains components that either directly use or could use GeoLink
-                      graph resources and relations.  The intent is to provide a simply method by 
-                      which pages can include components which leverage GeoLink.
-                      </p>
-                      <p>
-                        Through web components the amount of code necessary to implement these is 
-                        reduced.  Site developers can use simple HTML import directives to pull 
-                        complex components in.   These components expose a set of input 
-                        parameters that can be used to generate relevant and useful conent 
-                        for the hosting site from GeoLink.
+                        <p>
+                            This catalog contains components that either directly use or could use GeoLink graph resources and relations. The intent is to provide a simply method by which pages can include components which leverage GeoLink.
                         </p>
                         <p>
-                         For example, to include a simple component into a web page as few as 2 additional
-                         header entries needs to be made.  Placing the component itself into the page 
-                         then can be as short of 1 or 2 more HTML lines.  The approach works in both server
-                         and client side generated page structures.  
-                          </p>
-                         
-                        
+                            Through web components the amount of code necessary to implement these is reduced. Site developers can use simple HTML import directives to pull complex components in. These components expose a set of input parameters that can be used to generate relevant
+                            and useful conent for the hosting site from GeoLink.
+                        </p>
+                        <p>
+                            For example, to include a simple component into a web page as few as 2 additional header entries needs to be made. Placing the component itself into the page then can be as short of 1 or 2 more HTML lines. The approach works in both server and client
+                            side generated page structures.
+                        </p>
+
+
+<p>
+    First a couple line are needed to include the element itself as well as a polyfill 
+    library  to enable support in older browsers.  Many modern browsers do not require a
+    polyfill and this .js is ignored by the browser.
+    </p>
+    
+    <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #007700">&lt;script </span><span style="color: #0000CC">src=</span><span style="background-color: #fff0f0">&quot;/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js&quot;</span><span style="color: #007700">&gt;&lt;/script&gt;</span>
+<span style="color: #007700">&lt;link</span> <span style="color: #0000CC">rel=</span><span style="background-color: #fff0f0">&quot;import&quot;</span> <span style="color: #0000CC">href=</span><span style="background-color: #fff0f0">&quot;/components/glperson-element/glperson-element.html&quot;</span><span style="color: #007700">&gt;</span>
+</pre></td></tr></table></div>
+
+<p>
+    Next the element itself is referenced and used in the HTML of the page following the 
+    patterns of the component itself.  Parameters and values can be passed to the component
+    for use in obtaining remote data.   Note remote services will need to allow cross
+    origin scripting (CORS).
+    </p>
+
+                       
+                            <!-- HTML generated using hilite.me -->
+                            <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                                <table>
+                                    <tr>
+                                        <td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4</pre></td>
+                                        <td><pre style="margin: 0; line-height: 125%"> <span style="color: #007700">&lt;glperson</span><span style="color: #0000CC">-element</span> <span style="color: #0000CC">params=</span><span style="background-color: #fff0f0">&#39;{&quot;host&quot;: &quot;GeoLink&quot;,</span>
+<span style="background-color: #fff0f0">        &quot;hosturl&quot;:&quot;http://data.geolink.org&quot;, </span>
+<span style="background-color: #fff0f0">        &quot;url&quot;: &quot;http://data.geolink.org/id/person/642b9126-6f35-4f67-8490-2ebe94541070&quot;}&#39;</span><span style="color: #007700">&gt;</span>
+ <span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/glperson-element&gt;
+</pre></td>
+                                    </tr>
+                                </table>
+                            </div>
+
+
+
+                      
+
                     </div>
                     <div class="mdl-cell mdl-cell--6-col">
                         <p>Examples of remote pages called these hosted components</p>
-                        
-                        </div>
+
+                    </div>
 
                 </div>
             </div>

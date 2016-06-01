@@ -40,8 +40,8 @@
                 <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
                 <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
                 <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
-                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet</a>
-                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet GeoJSON call</a>
+                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet Polygon</a>
+                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet IODP call</a>
                 <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
             </nav>
         </div>
@@ -50,12 +50,13 @@
                 <div class="mdl-cell mdl-cell--6-col">
 
                     <h2>GeoLink WebComponent Dateset</h2>
-                    <p>For illustration I have placed a div around the componet and given it a solid black outline. This is to show the boundary of the component. </p>
-                    <div style="width:650px;border:2px solid black;margin-left:300px">
-                        <seed-element dataset='{"host": "Open Core Data",
+                    <p>A simple call based on a date set URI. It looks for resources associated in some manner with this URI. Only fines scientific ocean drilling cruises in this example.
+                    </p>
+
+                    <seed-element dataset='{"host": "Open Core Data",
         "hosturl":"http://opencoredata.org",  "url": "http://opencoredata.org/id/dataset/650f47bb-9715-4f58-be51-0fab02af1b68"}'>
-                        </seed-element>
-                    </div>
+                    </seed-element>
+
                 </div>
 
 

@@ -55,21 +55,19 @@
           <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
           <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
           <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
-           <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet</a>
-          <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet GeoJSON call</a>
+                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet Polygon</a>
+                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet IODP call</a>
           <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
         </nav>
       </div>
-      <main class="mdl-layout__content">
+      <main class="mdl-layout__content">    
         <div class="page-content">
-         <leaflet-map latitude="0.3516" longitude="102.304" zoom="6">
-        <leaflet-tilelayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" max-zoom="19">
-            Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contr.,
-            <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>
-        </leaflet-tilelayer>
+         <leaflet-map latitude="38.588966968232426" longitude="-72.2021484375" zoom="5">
+       <leaflet-tilelayer url="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}" max-zoom="13">
+                            Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri
+                        </leaflet-tilelayer>
         <template is="dom-bind">
-            <iron-ajax url="demo-geojson.json" last-response="{{data}}" auto>
-            </iron-ajax>
+            <iron-ajax url="http://opencoredata.org/api/v1/spatial/search/jrso?geowithin=POLYGON((-72.2021484375%2038.58896696823242%2C-59.1943359375%2038.58896696823242%2C-59.1943359375%2028.11801628757283%2C-72.2021484375%2028.11801628757283%2C-72.2021484375%2038.58896696823242))" auto last-response="{{data}}"></iron-ajax>
             <leaflet-geojson color="#FF0000" data="[[data]]"></leaflet-geojson>
         </template>
     </leaflet-map>

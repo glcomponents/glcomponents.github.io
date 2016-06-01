@@ -52,8 +52,8 @@
                 <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
                 <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
                 <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
-                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet</a>
-                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet GeoJSON call</a>
+                <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet Polygon</a>
+                <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet IODP call</a>
                 <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
             </nav>
         </div>
@@ -62,8 +62,39 @@
 
                 <div class="mdl-cell mdl-cell--6-col">
                     <p>
-                        Explain page and ajax calls.
-                    </p>
+   This component and the other leaflet component on this site use the well crafted 
+   Leaflet package web component (<a target="_blank" href="https://leaflet-extras.github.io/leaflet-map/demo.html">
+   https://leaflet-extras.github.io/leaflet-map/demo.html</a>). 
+   
+    This is not developed by GeoLink but is used as 
+   a component and then data bound to the Polymer (
+   <a target="_blank" href="https://www.polymer-project.org/1.0/">
+   https://www.polymer-project.org/1.0/</a>) Iron-Ajax component.  When connected 
+   to services that expose the GeoLink data holdings a simple approach to data visualization 
+   is the result. This approach is also easy for others to incorporate into their work.
+                     </p>
+                     
+                     
+                     
+                     <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+2
+3
+4
+5
+6
+7
+8
+9</pre></td><td><pre style="margin: 0; line-height: 125%"> <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-map</span> <span style="color: #0000CC">latitude=</span><span style="background-color: #fff0f0">&quot;16.5&quot;</span> <span style="color: #0000CC">longitude=</span><span style="background-color: #fff0f0">&quot;-80&quot;</span> <span style="color: #0000CC">zoom=</span><span style="background-color: #fff0f0">&quot;3&quot;</span><span style="color: #007700">&gt;</span>
+        <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-tilelayer</span> <span style="color: #0000CC">url=</span><span style="background-color: #fff0f0">&quot;https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}&quot;</span> <span style="color: #0000CC">max-zoom=</span><span style="background-color: #fff0f0">&quot;13&quot;</span><span style="color: #007700">&gt;</span>
+                            Tiles <span style="color: #880000; font-weight: bold">&amp;copy;</span> Esri <span style="color: #880000; font-weight: bold">&amp;mdash;</span> Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri
+        <span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-tilelayer&gt;
+        <span style="color: #007700">&lt;template</span> <span style="color: #0000CC">is=</span><span style="background-color: #fff0f0">&quot;dom-bind&quot;</span><span style="color: #007700">&gt;</span>
+            <span style="color: #007700">&lt;iron</span><span style="color: #0000CC">-ajax</span> <span style="color: #0000CC">url=</span><span style="background-color: #fff0f0">&quot;http://opencoredata.org/api/v1/spatial/expedition/165&quot;</span> <span style="color: #0000CC">auto</span> <span style="color: #0000CC">last-response=</span><span style="background-color: #fff0f0">&quot;{{data}}&quot;</span><span style="color: #007700">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/iron-ajax&gt;
+            <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-geojson</span> <span style="color: #0000CC">color=</span><span style="background-color: #fff0f0">&quot;#FF0000&quot;</span> <span style="color: #0000CC">data=</span><span style="background-color: #fff0f0">&quot;[[data]]&quot;</span><span style="color: #007700">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-geojson&gt;
+        <span style="color: #007700">&lt;/template&gt;</span>
+<span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-map&gt;
+</pre></td></tr></table></div>
+
 
                 </div>
 
