@@ -28,27 +28,34 @@ Example:
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css" integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX" crossorigin="anonymous">
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-   
+
+
     <template>
-        <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=SELECT+DISTINCT++%3Fp+%3Fo%0D%0AWHERE+%7B%0D%0A+++%3Chttp%3A%2F%2Fdata.geolink.org%2Fid%2Fperson%2F642b9126-6f35-4f67-8490-2ebe94541070%3E+%3Fp+%3Fo%0D%0A%7D&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on" handle-as="json" headers='{"Accept": "application/sparql-results+json"}' debounce-duration="300" last-response="{{ajaxResponse}}">
+        <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=prefix+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0Aprefix+owl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23%3E%0D%0Aprefix+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0Aprefix+glview%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E+%0D%0A%0D%0ASELECT+DISTINCT++%3FnewURI+%3Fsameas++%3Ffamily+%3Fgiven+%0D%0AWHERE+%7B%0D%0A+++%3C{{params.url}}%3E+owl%3AsameAs+%3Fsameas+.%0D%0A+++%3FnewURI+owl%3AsameAs+%3Fsameas+.%0D%0A+++%3Fsameas++glview%3AhasFamilyName+%3Ffamily+.%0D%0A+++%3Fsameas++glview%3AhasGivenName+%3Fgiven+.%0D%0A%7D&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on" handle-as="json" headers='{"Accept": "application/sparql-results+json"}' debounce-duration="300" last-response="{{ajaxResponse}}">
         </iron-ajax>
 
      <div class="container-fluid"  style="margin:10px;border:2px solid black">
         <div class="row" >
            
             <div class="cols-md-6">
-                                <img style="margin:5px;width:75px" src="./images/people.png">
+                <img style="margin:5px;width:75px" src="./images/people.png">
 
-                <h5>Resource ID: <br/>
-                            <a target="_blank" href="{{params.url}}">{{params.url}}</a>
-                            </h5>
-                <p><a target="_blank" href="{{params.hosturl}}" class="mdl-button">Graph data from {{params.host}}</a></p>
-                <!--<p> {{callGeoLinkPerson("Douglas Fils")}} </p>-->
-                <table class="table table-condensed table-hover">
-                   <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">
-                       <tr><td> [[item.o.value]]</td></tr>
-                   </template>
-                </table>
+                <h5 style="margin:5px">Local Resource ID: <br/> {{params.url}} </h5>
+
+                <h5 style="margin:5px">Resource data from: <a target="_blank" href="{{params.hosturl}}" >{{params.host}}</a></h5>
+
+                <!--<template is="dom-bind" list="[[ajaxResponse.results.bindings.item.sameas.value]]">  
+                      <p style="margin:5px"> {{callUnique([[list]])}} </p>
+                </template>-->
+
+                <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
+                    <table style="margin:10px;width:80%" class="table table-condensed table-hover">
+                        <tr><td>  [[item.given.value]]  [[item.family.value]]  </td></tr>
+                        <tr><td> View at <a target="_blank" href="[[item.newURI.value]]"> [[item.newURI.value]] </a> </td></tr>
+                        <!--<tr><td> [[item.sameas.value]]</td></tr>-->
+                    </table>   
+                </template>
+
     </div>
     </div>
     </div>
@@ -143,6 +150,12 @@ Example:
             return 'glperson-element says, ' + response;
         },
 
+     
+        callUnique: function(value) {
+            var response = value +"test" || 'No Value Provided';
+            return 'GL Resource: ' + response;
+        },
+
 
         /**
          * DF was here
@@ -158,17 +171,6 @@ Example:
             return 'GLPerson identity: ' + response;
         },
 
-        /**
-         * Attempts to destroy this element's enemies with an any beam of light!
-         *
-         * Or, at least, dispatches an event in the vain hope that someone else will
-         * do the zapping.
-         */
-        fireLasers: function() {
-            this.fire('glperson-element-lasers', {
-                sound: 'Pew pew!'
-            });
-        }
 
     });
 </script>
