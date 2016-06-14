@@ -51,7 +51,7 @@ Example:
                <a target="_blank" href=" {{ajax2.results.bindings.0.sameas.value}}" > {{ajax2.results.bindings.0.sameas.value}}</a>
               </h4>
 
-                <h5 style="margin:5px">Local Resource: <br/> {{params.url}} </h5>
+                <h5 style="margin:5px">Local Seed Resource: <br/> {{params.url}} </h5>
 
 
 
@@ -61,9 +61,22 @@ Example:
                       <p style="margin:5px"> {{callUnique([[list]])}} </p>
                 </template>-->
 
-                <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
+    <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
                     <table style="margin:10px;width:80%" class="table table-condensed table-hover">
-                        <tr><td>  [[item.given.value]]  [[item.family.value]]  </td></tr>
+                        <tr><td>  [[item.given.value]]  [[item.family.value]]
+
+
+                            
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "name": "[[item.given.value]]  [[item.family.value]]",
+}
+</script>
+                            
+                            
+                              </td></tr>
                         <tr><td> More at <a target="_blank" href="[[item.newURI.value]]"> [[item.newURI.value]] </a> </td></tr>
                         <!--<tr><td> [[item.sameas.value]]</td></tr>-->
                     </table>   
@@ -163,9 +176,9 @@ Example:
             return 'glperson-element says, ' + response;
         },
 
-     
+
         callUnique: function(value) {
-            var response = value +"test" || 'No Value Provided';
+            var response = value + "test" || 'No Value Provided';
             return 'GL Resource: ' + response;
         },
 
