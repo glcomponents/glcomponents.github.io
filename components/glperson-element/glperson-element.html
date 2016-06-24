@@ -20,6 +20,7 @@ Example:
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" crossorigin="anonymous"></script>
     <link rel="import" href="./bower_components/polymer/polymer.html">
     <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
+    <link rel="import" href="./bower_components/iron-overlay-behavior/iron-overlay-behavior.html">
     <!-- Material Design Light -->
     <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css"> -->
     <!-- Latest compiled and minified CSS -->
@@ -29,7 +30,12 @@ Example:
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 
-
+  <style is="custom-style">
+    iron-overlay-backdrop {
+      --iron-overlay-backdrop-opacity: 0.9;
+      --iron-overlay-backdrop-background-color: #222;
+    }
+  </style>
                             
 <script type="application/ld+json">
 {
@@ -70,7 +76,7 @@ Example:
                       <p style="margin:5px"> {{callUnique([[list]])}} </p>
                 </template>-->
 
-    <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
+               <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
                     <table style="margin:10px;width:80%" class="table table-condensed table-hover">
                         <tr><td>  [[item.given.value]]  [[item.family.value]]                
                               </td></tr>
@@ -79,6 +85,7 @@ Example:
                     </table>   
                 </template>
 
+  
     </div>
     </div>
     </div>
