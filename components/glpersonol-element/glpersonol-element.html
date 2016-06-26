@@ -22,6 +22,7 @@ Example:
     <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
     <link rel="import" href="./bower_components/paper-dialog/paper-dialog.html">
     <link rel="import" href="./bower_components/paper-button/paper-button.html">
+     <link rel="import" href="./bower_components/csv-preview/csv-preview.html">
 
     <!-- Material Design Light -->
     <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css"> -->
@@ -58,7 +59,41 @@ Example:
         }
     </script>
 
-    <script src="./bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
+      <style>
+    .controls {
+      margin: 10px 0 50px 0;
+      display: block;
+    }
+
+    .controls textarea,
+    .controls button {
+      display: block;
+      margin: 0 auto;
+    }
+
+    .controls textarea {
+      margin-bottom: 5px;
+    }
+
+    @media (max-width: 767px) {
+      .hidden-xs {
+        display: none !important;
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      .hidden-sm {
+        display: none !important;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hidden-md {
+        display: none !important;
+      }
+    }
+  </style>
 
 
     <template>
@@ -66,6 +101,13 @@ Example:
         </iron-ajax>
 
         <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=prefix+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0Aprefix+owl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23%3E%0D%0Aprefix+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0Aprefix+glview%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E+%0D%0A%0D%0ASELECT+DISTINCT++%3Fsameas+%0D%0AWHERE+%7B%0D%0A+++%3C{{params.url}}%3E+owl%3AsameAs+%3Fsameas+.%0D%0A+++%3FnewURI+owl%3AsameAs+%3Fsameas+.%0D%0A%7D&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on" handle-as="json" headers='{"Accept": "application/sparql-results+json"}' debounce-duration="300" last-response="{{ajax2}}">   </iron-ajax>
+
+
+   <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=PREFIX+gl%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fcruise+%3Frole+%3Fperson+%3Fmatch+%3Fid_value+%3Fid_scheme+%3Fid_uri+%3Fperson_full_name+%3Femail_address%0D%0A%23%3Fabstract+%3Fcruise_track%0D%0A%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A++++%3Fcruise+a+gl%3ACruise+.%0D%0A++++%3Fperson+%3Frole+%3Fcruise+.%0D%0A++++%3Fperson+a+gl%3APerson+.%0D%0A++%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fcruise%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fcruise+a+gl%3ACruise+.%0D%0A+++++++++FILTER+%28%3Fcruise+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D+UNION+%7B%0D%0A++++%3Fcruise+a+gl%3ACruise+.%0D%0A++++%3Fcruise+%3Frole+%3Fperson+.%0D%0A++++%3Fperson+a+gl%3APerson+.%0D%0A%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fcruise%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fcruise+a+gl%3ACruise%0D%0A+++++++++FILTER+%28%3Fcruise+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasIdentifier+%3Fidentifier+.%0D%0A++++%3Fidentifier+gl%3AhasIdentifierValue+%3Fid_value+.%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierScheme+%3Fid_scheme+.%0D%0A++++%7D%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierResolveURI+%3Fid_uri+.%0D%0A++++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+owl%3AsameAs+%3Fmatch+.%0D%0A++++%3Fmatch+a+gl%3APerson+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasFullName+%3Fperson_full_name+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasEmailAddress+%3Femail_address+.%0D%0A++%7D%0D%0A%7D&format=text%2Fcsv&timeout=0&debug=on" handle-as="json" headers='{"Accept": "text/csv"}' debounce-duration="300" 
+   last-response="{{ajax3}}">   </iron-ajax>
+
+
+<!-- for new component we will need  text/csv or  text%2Fcsv for CSV format -->
 
 
    <!-- set display false for a surrounding div is the ajax response is empty -->
@@ -79,7 +121,7 @@ Example:
                 <h4 style="margin:5px"><a target="_blank" href="{{params.hosturl}}" >{{params.host}}</a> Resource Information for: <br/>
 
 
-               <a target="_blank" href=" {{ajax2.results.bindings.0.sameas.value}}" > {{ajax2.results.bindings.0.sameas.value}}</a>
+               <a target="_blank" href="{{ajax2.results.bindings.0.sameas.value}}" > {{ajax2.results.bindings.0.sameas.value}}</a>
               </h4>
 
                 <h5 style="margin:5px">Local Resource: <br/> {{params.url}} </h5>
@@ -108,13 +150,16 @@ Example:
     </section>
 
     <paper-dialog style="left:20%" id="scrolling" alwaysOnTop="true">
-        <h2>Award Matches</h2>
+        <h2>Award Matches from GeoLink Knowledge Graph</h2>
         <paper-dialog-scrollable style="margin-left:15px">
+
+
+       <!--<csv-preview data={{ajax3}}></csv-preview>   -->
+
 
             <div id="" style="overflow-y: scroll; height:400px;">
 
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
+  <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
                     <tbody class="style-scope glperson-element">
                         <tr class="style-scope glperson-element">
                             <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/620090">KAUST-Kaartvedt-2014</a></strong> by King Abdullah University of Science
@@ -705,6 +750,9 @@ Example:
                         </tr>
                     </tbody>
                 </table>
+
+
+              
 
             </div>
 
