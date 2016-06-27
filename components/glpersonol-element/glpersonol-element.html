@@ -22,7 +22,9 @@ Example:
     <link rel="import" href="./bower_components/iron-ajax/iron-ajax.html">
     <link rel="import" href="./bower_components/paper-dialog/paper-dialog.html">
     <link rel="import" href="./bower_components/paper-button/paper-button.html">
-     <link rel="import" href="./bower_components/csv-preview/csv-preview.html">
+    <link rel="import" href="./bower_components/csv-preview/csv-preview.html">
+    <link rel="import" href="./bower_components/iron-icons/iron-icons.html">
+
 
     <!-- Material Design Light -->
     <!--<link rel="stylesheet" href="https://storage.googleapis.com/code.getmdl.io/1.0.6/material.indigo-pink.min.css"> -->
@@ -60,40 +62,40 @@ Example:
     </script>
 
 
-      <style>
-    .controls {
-      margin: 10px 0 50px 0;
-      display: block;
-    }
-
-    .controls textarea,
-    .controls button {
-      display: block;
-      margin: 0 auto;
-    }
-
-    .controls textarea {
-      margin-bottom: 5px;
-    }
-
-    @media (max-width: 767px) {
-      .hidden-xs {
-        display: none !important;
-      }
-    }
-
-    @media (min-width: 768px) and (max-width: 991px) {
-      .hidden-sm {
-        display: none !important;
-      }
-    }
-
-    @media (max-width: 1024px) {
-      .hidden-md {
-        display: none !important;
-      }
-    }
-  </style>
+    <style>
+        .controls {
+            margin: 10px 0 50px 0;
+            display: block;
+        }
+        
+        .controls textarea,
+        .controls button {
+            display: block;
+            margin: 0 auto;
+        }
+        
+        .controls textarea {
+            margin-bottom: 5px;
+        }
+        
+        @media (max-width: 767px) {
+            .hidden-xs {
+                display: none !important;
+            }
+        }
+        
+        @media (min-width: 768px) and (max-width: 991px) {
+            .hidden-sm {
+                display: none !important;
+            }
+        }
+        
+        @media (max-width: 1024px) {
+            .hidden-md {
+                display: none !important;
+            }
+        }
+    </style>
 
 
     <template>
@@ -103,8 +105,15 @@ Example:
         <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=prefix+foaf%3A+%3Chttp%3A%2F%2Fxmlns.com%2Ffoaf%2F0.1%2F%3E%0D%0Aprefix+owl%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F2002%2F07%2Fowl%23%3E%0D%0Aprefix+rdf%3A+%3Chttp%3A%2F%2Fwww.w3.org%2F1999%2F02%2F22-rdf-syntax-ns%23%3E%0D%0Aprefix+glview%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E+%0D%0A%0D%0ASELECT+DISTINCT++%3Fsameas+%0D%0AWHERE+%7B%0D%0A+++%3C{{params.url}}%3E+owl%3AsameAs+%3Fsameas+.%0D%0A+++%3FnewURI+owl%3AsameAs+%3Fsameas+.%0D%0A%7D&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on" handle-as="json" headers='{"Accept": "application/sparql-results+json"}' debounce-duration="300" last-response="{{ajax2}}">   </iron-ajax>
 
 
+   <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=%23SPARQL+Endpoint%3A+http%3A%2F%2Fdata.geolink.org%2Fsparql%0D%0A%0D%0APREFIX+gl%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fperson+%3Faward+%3Faward_title+%3Fabstract+%3Fstart+%3Fend+%3Fsponsor_name+%28group_concat%28distinct+%3Forg_name%3Bseparator%3D%22%3A%3A%3A%22%29+as+%3Fsub_sponsor_names%29+%3Fmatch+%3Fid_value+%3Fid_scheme+%3Fid_uri%0D%0AWHERE+%7B%0D%0A%0D%0A++%7B%0D%0A++++%3Faward+a+gl%3AAward+.%0D%0A++++%3Fcruise+gl%3AhasAward+%3Faward+.%0D%0A++++%3Fcruise+a+gl%3ACruise+.%0D%0A++++%3Fperson+%3Fpred+%3Fcruise+.%0D%0A++%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fperson%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Fperson+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fperson+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fperson+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fperson+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++FILTER+%28%3Fperson+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D+UNION+%7B%0D%0A++++%3Faward+a+gl%3AAward+.%0D%0A++++%3Faward+%3Frole+%3Fperson+.%0D%0A++%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fperson%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Fperson+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fperson+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fperson+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fperson+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fperson+a+gl%3APerson+.%0D%0A+++++++++FILTER+%28%3Fperson+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fperson%2F109399%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasTitle+%3Faward_title+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasIdentifier+%3Fidentifier+.%0D%0A++++%3Fidentifier+gl%3AhasIdentifierValue+%3Fid_value+.%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierScheme+%3Fid_scheme+.%0D%0A++++%7D%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierResolveURI+%3Fid_uri+.%0D%0A++++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasAbstract+%3Fabstract+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasStartDate+%3Fstart+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasEndDate+%3Fend+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+gl%3AhasSponsor+%3Fsponsor+.%0D%0A++++%3Fsponsor+gl%3AhasTitle+%3Fsponsor_name+.%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Forg+gl%3AhasSubOrganization%2B+%3Fsponsor+.%0D%0A++++++%3Forg+gl%3AhasTitle+%3Forg_name+.%0D%0A++++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Faward+owl%3AsameAs+%3Fmatch+.%0D%0A++++%3Fmatch+a+gl%3AAward+.%0D%0A++%7D%0D%0A%7D%0D%0AORDER+BY+%3Fstart+%3Fsponsor_name+%3Faward_title+%3Fend&format=application%2Fsparql-results%2Bjson&timeout=0&debug=on" handle-as="json" headers='{"Accept": "application/sparql-results+json"}' debounce-duration="300" 
+   last-response="{{ajax4}}">   </iron-ajax>
+
+
+
    <iron-ajax auto url="http://data.oceandrilling.org/glsparql?default-graph-uri=&query=PREFIX+gl%3A+%3Chttp%3A%2F%2Fschema.geolink.org%2F1.0%2Fbase%2Fmain%23%3E%0D%0A%0D%0ASELECT+DISTINCT+%3Fcruise+%3Frole+%3Fperson+%3Fmatch+%3Fid_value+%3Fid_scheme+%3Fid_uri+%3Fperson_full_name+%3Femail_address%0D%0A%23%3Fabstract+%3Fcruise_track%0D%0A%0D%0AWHERE+%7B%0D%0A++%7B%0D%0A++++%3Fcruise+a+gl%3ACruise+.%0D%0A++++%3Fperson+%3Frole+%3Fcruise+.%0D%0A++++%3Fperson+a+gl%3APerson+.%0D%0A++%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fcruise%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fcruise+a+gl%3ACruise+.%0D%0A+++++++++FILTER+%28%3Fcruise+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D+UNION+%7B%0D%0A++++%3Fcruise+a+gl%3ACruise+.%0D%0A++++%3Fcruise+%3Frole+%3Fperson+.%0D%0A++++%3Fperson+a+gl%3APerson+.%0D%0A%0D%0A++++%7B%0D%0A+++++SELECT+DISTINCT+%3Fcruise%0D%0A+++++WHERE+%7B%0D%0A+++++++%7B%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fmatch+owl%3AsameAs+%3Fcruise+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++++%3Fcruise+owl%3AsameAs+%3Fmatch+.%0D%0A+++++++%7D%0D%0A+++++++UNION+%7B%0D%0A+++++++++%3Fcruise+a+gl%3ACruise%0D%0A+++++++++FILTER+%28%3Fcruise+%3D+%3Chttp%3A%2F%2Fdata.rvdata.us%2Fid%2Fcruise%2FOC473%3E%29%0D%0A+++++++%7D%0D%0A+++++%7D%0D%0A+++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasIdentifier+%3Fidentifier+.%0D%0A++++%3Fidentifier+gl%3AhasIdentifierValue+%3Fid_value+.%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierScheme+%3Fid_scheme+.%0D%0A++++%7D%0D%0A++++OPTIONAL+%7B%0D%0A++++++%3Fidentifier+gl%3AhasIdentifierResolveURI+%3Fid_uri+.%0D%0A++++%7D%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+owl%3AsameAs+%3Fmatch+.%0D%0A++++%3Fmatch+a+gl%3APerson+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasFullName+%3Fperson_full_name+.%0D%0A++%7D%0D%0A++OPTIONAL+%7B%0D%0A++++%3Fperson+gl%3AhasEmailAddress+%3Femail_address+.%0D%0A++%7D%0D%0A%7D&format=text%2Fcsv&timeout=0&debug=on" handle-as="json" headers='{"Accept": "text/csv"}' debounce-duration="300" 
    last-response="{{ajax3}}">   </iron-ajax>
+
+
 
 
 <!-- for new component we will need  text/csv or  text%2Fcsv for CSV format -->
@@ -115,35 +124,35 @@ Example:
      <div class="container-fluid"  style="margin:10px;border:2px solid black">
         <div class="row" >
            
-            <div class="cols-md-6">
-                <img style="margin:5px;width:75px" src="./images/eclogo.png">
-
-                <h4 style="margin:5px"><a target="_blank" href="{{params.hosturl}}" >{{params.host}}</a> Resource Information for: <br/>
-
-
-               <a target="_blank" href="{{ajax2.results.bindings.0.sameas.value}}" > {{ajax2.results.bindings.0.sameas.value}}</a>
-              </h4>
-
-                <h5 style="margin:5px">Local Resource: <br/> {{params.url}} </h5>
+            
+                
+                <img class="img-thumbnail" style="margin:5px;width:75px" align="left" width="100" height="100" src="./images/eclogo.png">
+               
 
 
-
-          
+                <h5 style="margin:5px"><a target="_blank" href="{{params.hosturl}}" >{{params.host}}</a> Resource: <br/>
+                 <a target="_blank" href="{{ajax2.results.bindings.0.sameas.value}}" > {{ajax2.results.bindings.0.sameas.value}}</a>
+                 </h5>
               
+               
+            
+                <h6 style="margin:5px">Local Resource: <br/> {{params.url}} </h6>
+             
                 <!--<template is="dom-bind" list="[[ajaxResponse.results.bindings.item.sameas.value]]">  
                       <p style="margin:5px"> {{callUnique([[list]])}} </p>
                 </template>-->
 
+<div class="row"  style="margin:10px;">
     <template is="dom-repeat" items="[[ajaxResponse.results.bindings]]">                       
-                    <table style="margin:10px;width:80%" class="table table-condensed table-hover">
-                        <tr><td>  [[item.given.value]]  [[item.family.value]]                
-                              </td></tr>
-                        <tr><td> See also: <a target="_blank" href="[[item.newURI.value]]"> [[item.newURI.value]] </a> </td></tr>
+                    <!--<table style="margin:10px;width:80%" class="table table-condensed table-hover">-->
+                       <p style="margin:15px"> <span style="margin-right:15px">[[item.given.value]]  [[item.family.value]]  </span>            
+                             
+                       <iron-icon icon="icons:open-in-new"></iron-icon> <a target="_blank" href="[[item.newURI.value]]"> [[item.newURI.value]] </a> </p>
                         <!--<tr><td> [[item.sameas.value]]</td></tr>-->
-                    </table>   
+                    <!--</table>   -->
                 </template>
 
-
+</div>
     <section onclick="clickHandler(event)">
 
         <paper-button data-dialog="scrolling">View Award Matches</paper-button>
@@ -153,608 +162,26 @@ Example:
         <h2>Award Matches from GeoLink Knowledge Graph</h2>
         <paper-dialog-scrollable style="margin-left:15px">
 
-
-       <!--<csv-preview data={{ajax3}}></csv-preview>   -->
-
-
-            <div id="" style="overflow-y: scroll; height:400px;">
-
-  <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/620090">KAUST-Kaartvedt-2014</a></strong> by King Abdullah University of Science
-                                and Technology (KAUST)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54625">unknown Hydrography NOAA NEFSC</a></strong> by NMFS/Northeast Fisheries
-                                Science Center (NOAA NEFSC)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54636">unknown CMarZ_2004-2010 NOAA OEP</a></strong> by NOAA Ocean Exploration
-                                Program (NOAA OEP)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54931">ANT-0196489</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54708">ANT-0234163</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54687">ANT-0523332</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54922">ANT-9909956</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54871">ANT-9910007</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54822">ANT-9910092</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54715">ANT-9910096</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54688">ANT-9910098</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54827">ANT-9910100</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54694">ANT-9910102</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54667">ANT-9910175</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54773">ANT-9910307</a></strong> by NSF Antarctic Sciences (NSF ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54617">unknown SOGLOBEC NSF ANT</a></strong> by NSF Antarctic Sciences (NSF
-                                ANT)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54702">OCE-1041068</a></strong> by NSF Ocean Sciences (NSF OCE)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/473677">OCE-8311201</a></strong> by NSF Ocean Sciences (NSF OCE)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/473676">OCE-8709962</a></strong> by NSF Ocean Sciences (NSF OCE)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/55057">OCE-9313677</a></strong> by NSF Ocean Sciences (NSF OCE)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54626">unknown GB NOAA</a></strong> by National Oceanic and Atmospheric Administration
-                                (NOAA)
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54654">DES-74-02783A1</a></strong> by National Science Foundation (NSF)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/529114">OCE-1435578</a></strong> by National Science Foundation (NSF)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54610">unknown GB NSF</a></strong> by National Science Foundation (NSF)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54897">N00014-66-CO241</a></strong> by Office of Naval Research (ONR)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54705">NR-083-004</a></strong> by Office of Naval Research (ONR)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://lod.bco-dmo.org/geolink/id/award/54611">unknown CMarZ_2004-2010 Sloan</a></strong> by The Sloan Foundation (Sloan)</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/f598b71b-66d8-40d4-aa36-acb903c5b5ab">Interdisciplinary Workshop on Gulf Stream Anticyclonic Eddies</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/0f123a86-21e4-4842-9389-3a2dd8d8a970">The Spatial Structure of Marine Zooplankton Communities</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/2bf24041-8713-4c03-bb47-d51cd12f70e9">Warm Core Rings Planning Meeting</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/4abe21ff-8fb8-4c50-be10-c0c2e67c6e48">Zooplankton Rate Processes and Copepod Distribution PatternsAs Affected By Gulf Stream Warm Core Rings</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/f9fb4bb2-b317-4fab-afac-05ebcab1b34f">Ecological Studies of Zooplankton Populations in Warm Core Rings and in the Northwestern Atlantic Slope Water</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/2340152a-6f0b-4784-b22b-edfed59fc0f5">Population Dynamics of Slope Water Zooplankton Species and TheRelationship to Physical and Biological Processes Controlling Expatriated Populations in Gulf Stream Cold Core Rings</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/efccf311-f23f-4c77-a88e-ed441d76b282">U.S.-Australia-New Zealand Workshop on "Warm-Core Rings Formed By the East Australia Current and the Gulf Stream;" Wellington, New Zealand; January 18 Through 23, 1982</a></strong>                                by National Science Foundation: Office of International Science and Engineering</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/54cc16c1-a478-4436-85ff-48f0926b5442">Warm Core Ring Program Service Office Support During Data Synthesis Phase for the 1981-1982 Field Program</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/2fa9dc92-c201-422b-9729-d741f48a676c">US-Japan-Australia Joint Seminar: Rings Formed by the Gulf Stream, the Kuroshio, and the East Australian Current/ Tokyo, Japan/May, 1985</a></strong>                                by National Science Foundation: Office of International Science and Engineering</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c4014130-41e7-4293-aedc-0e3205b2f023">Ecological Studies of Zooplankton Populations in Gulf StreamWarm-Core Rings and the Slope Water: Completion of Sample Precessing and Participation in the Synthesis Phase, etc.</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/817c6fdf-1274-41dc-89de-5457e3fd4eba">Diversification of the MOCNESS Sensor Package and the Data Acquisition/Processing System</a></strong>                                by National Science Foundation</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/77940355-110b-4fdf-ba58-68aec6f21553">Workshop to Evaluate Upper Ocean Dynamics Studies in Conjunction with ODP RV/JOIDES Resolution Operations</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/4b0b287b-5582-4cb0-856d-4f62395943b2">Ecological Studies of Zooplankton Populations in Gulf StreamRings and the Northwestern Atlantic Ocean</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/66e2a320-f8bb-4933-9d11-2b8dc661c0d4">BIOSPAR: Development of a BIOacoustic Sensing Platform and Relay System for Time Series Studies of Biologically Produced Acoustic Backscattering</a></strong>                                by National Science Foundation</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/b82627d3-f8c9-491d-80b7-22b0d6f9b715">U.S.-Japan Joint Seminar: Warm-Core Rings / Woods Hole, Massachusetts / October 1988</a></strong>                                by National Science Foundation: Office of International Science and Engineering</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/7b4ec5c1-8536-4c8a-a7b5-149ada52ab2c">REU: Coastal Processes and Trophic Dynamics</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/07e7585d-f802-4035-8164-f5e7a7bac7bf">Bioacoustical Oceanography: Dual-Beam Acoustic Deployed on a Multiple Opening/Closing Net and Environmental Sensing System</a></strong>                                by National Science Foundation</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/db229805-a105-420e-b213-12d808ce5051">Quantitative Characterization of the Frequency Dependence ofAcoustic Backscattering from Zooplankton and Micronekton</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/ab71a70b-f524-44b1-93ec-7e523c6b4307">Program Services and Data Management for the U.S. GLOBEC Northwest Atlantic Georges Bank Program</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/750873cb-6f48-4031-883f-04445919a2cd">U.S. JGOFS Data Management</a></strong> by
-                                National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c4e68eb9-b909-40f2-82c2-c6712c0fa505">US-GLOBEC: Broad-Scale Acoustic Measurements of Zooplankton and Nekton in the Georges Bank Region</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/ebe4234a-f7cb-4373-9235-6402f9ba32ae">U.S. GLOBEC: Program Services and Data Management for the Northwest Atlantic Georges Bank Program</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/cf23018c-52c9-4bbe-bedb-71833459743b">U.S. GLOBEC: Broad-Scale Patterns of the Distribution of Zooplankton and Nekton in Relation to Micro- to Coarse-Scale Physical Structure in the Georges Bank Region</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/3f4bb66a-6e74-4bae-9fe0-d6691f02531e">In Situ Measurements of Sound Speed and Density of Live Zooplankton</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c9a48e7f-8d74-4fb4-9438-e90ac7e7cd54">US GLOBEC: Program Services and Data Management for Phase III of the Northwest Atlantic Georges Bank Program</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/06296cb9-06c7-4a18-b4d3-f2c45bd4a424">U.S. GLOBEC: Broad-Scale Patterns of the Distribution of Zooplankton and Nekton in Relation to Micro- to Coarse-Scale Physical Structure in the Georges Bank Region</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/e54153de-a325-47c6-979c-480dc762ae59">GLOBEC: Winter Distribution and Success of Southern Ocean Krill</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/0cee48b6-e7f9-4231-a025-c8b24c2c1bf4">Operation of the CPR Survey in the North Atlantic</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c14c9d90-6c7d-42bf-9dd2-5e7aca2aef2b">U.S. GLOBEC National Coordinating Office</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c696e6d4-8270-4d22-9157-effb7667d5d1">Data Management Services for the U.S. GLOBEC Southern Ocean Program</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/6942387d-f5a7-45c7-9317-2a8434cb2700">In Situ Measurements of the Acoustic Properties of Antarctic Krill</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/44effdc7-584c-4a3f-80e0-a3c47e3d6f35">GLOBEC-01: Integration and Synthesis of the George's Bank Broad-Scale Survey Results</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                    <div></div>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/9628ce15-0d33-410e-a6b8-cef37e613ad0">Collaborative Project - Time/space Patterns of Microsatellite DNA Variation in Relation to Patch Structure of Southern Ocean Krill, Euphasia Superba</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/66291808-1c9e-4833-8e21-f1f29312ebf8">Workshop on the impact of basin-scale oceanographic and climate-related processes on the dynamics of plankton and fish populations in the North Atlantic Ocean</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/5b0a3bfe-bdfc-4e8a-8b92-f2859e2ae7c9">Data Management Services for the U.S. GLOBEC Southern Ocean Program</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/deb08281-b6b6-4707-b1cd-63ee421a9717">Resolving the Impact of Climatic Processes on Ecosystems of the North Atlantic Basin and Shelf Seas: Integrating and Advancing Observation, Monitoring, and Prediction</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/972a1206-be46-4caf-b99e-e614358f7c0f">The Continuous Plankton Recorder (CPR) Survey: Monitoring the Plankton of the North Atlantic</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/727db5fb-07c2-408c-9ee4-1bf3baf67e38">A Data Management System and Portal for Access to Ecological and Biogeochemical Ocean Data</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/65a1cd86-17c7-4a0d-b949-d7d00c51bf84">Data and Information Management Services for the U.S. GLOBEC Southern Ocean Program</a></strong>                                by Division of Antarctic Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/403455d6-2ff6-4630-8e49-34b7aaa05238">Collaborative Research: Climate Forcing of Calanus finmarchicus Populations of the North Atlantic</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/6e5e014b-af8e-4ee8-8dff-5472a7af8e43">Biological and Physical Determinants of Euphausiid Aggregation, Behavior, and Interaction with Higher Predators at an Abrupt Topographical Feature in the Gulf of Maine</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/6b99f44e-1030-4508-b640-4b3e2fae1e9a">A Data Management System and Portal for Access to Ecological and Biogeochemical Ocean Data - BCO-DMO</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/54a1434e-f20e-441c-9ead-aaa9c5c0b8f6">Horizontal and Vertical Distribution of Thecosome Pteropods in Relation to Carbonate Chemistry in the Northwest Atlantic and Northeast Pacific</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/4e3cdfb7-53c9-4d66-911f-cd090981809d">The Continous Plankton Recorder (CPR) Survery: Monitoring the Plankton of the North Atlantic</a></strong>                                by National Science Foundation: Directorate For Geosciences: Division Of Ocean Sciences</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/33add26e-8789-4c87-9585-36b1255620d2">EarthCube GEO Domain Workshop: Articulating Cyberinfrastructure Needs of the Ocean Ecosystem Dynamics Community</a></strong>                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-                <table style="margin:10px;width:80%" class="table table-condensed table-hover style-scope glperson-element">
-                    <tbody class="style-scope glperson-element">
-                        <tr class="style-scope glperson-element">
-                            <td class="style-scope glperson-element"><strong class="style-scope glperson-element"><a target="_blank" class="style-scope glperson-element" href="http://data.geolink.org/id/award/nsf/c88273ea-6587-4819-9017-836a012d8423">Biological and Chemical Oceanography Data Management Office (BCO-DMO): A System for Access to Ecological and Biogeochemical Ocean Data</a></strong>                                </td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
-              
+            <div id="" style="overflow-y: scroll; height:300px;">
+
+
+                <!--person	award	award_title	abstract	start	end	sponsor_name	sub_sponsor_names	match	id_value	id_scheme	id_uri-->
+
+                <template is="dom-repeat" items="[[ajax4.results.bindings]]">                       
+                    <table style="margin:10px;width:80%" class="table table-condensed table-hover">
+                        <tr><td> <a target="_blank" href="[[item.award.value]]">[[item.award_title.value]]</a>  by    [[item.sponsor_name.value]]            
+                              </td></tr>
+                        <!--<tr><td> See also: <a target="_blank" href="[[item.newURI.value]]"> [[item.newURI.value]] </a> </td></tr>-->
+                        <!--<tr><td> [[item.sameas.value]]</td></tr>-->
+                    </table>   
+                </template>
 
             </div>
+
+            <!--<csv-preview data={{ajax3}}></csv-preview>   -->
+
+
+
 
         </paper-dialog-scrollable>
 
@@ -769,7 +196,6 @@ Example:
     </paper-dialog>
 
 
-    </div>
     </div>
     </div>
 
