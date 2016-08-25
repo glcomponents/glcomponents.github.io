@@ -1,4 +1,4 @@
-# GeoLink Web Component Work
+# GeoLink Web Components
 
 ## Intro
 
@@ -9,27 +9,30 @@ Through web components the amount of code necessary to implement these is reduce
 For example, to include a simple component into a web page as few as 2 additional header entries needs to be made. Placing the component itself into the page then can be as short of 1 or 2 more HTML lines. The approach works in both server and client side generated page structures.
 
 
-## SPARQL notes
+#### Implementation
+First a couple line are needed to include the element itself as well as a polyfill library to enable support in older browsers. Many modern browsers do not require a polyfill and this .js is ignored by the browser.
 
-#### Person component query notes
-
-```
-http://data.geolink.org/id/person/642b9126-6f35-4f67-8490-2ebe94541070
-http://data.geolink.org/id/person/36f92030-0429-4410-9c84-8543505f230f
-http://data.geolink.org/id/person/e2b705a5-cd30-45ca-a678-4664789c826c
-```
-
-The basics of the person component is that we take a query like
+Next the element itself is referenced and used in the HTML of the page following the patterns of the component itself. Parameters and values can be passed to the component for use in obtaining remote data. Note remote services will need to allow cross origin scripting (CORS).
 
 ```
-SELECT DISTINCT  ?p ?o
-WHERE {
-   <http://data.geolink.org/id/person/642b9126-6f35-4f67-8490-2ebe94541070> ?p ?o
-}
+!-- GeoLink Web component include and polyfill -->
+<script src="http://glcomponents.tech/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js">
+<link rel="import" href="http://glcomponents.tech/components/glperson-element/glperson-element.html">
+
+<!-- GeoLink component call -->
+<glperson-element params='{"host": "GeoLink", "hosturl":"http://geolink.org", "url": "http://opencoredata.org/id/resource/people/v1/078d82ba-21df-11e6-8725-c8bcc89d1645"}'/>
+
 ```
 
-which uses an ID for the person.  This id is either a local URI or a URI used from the 
-GeoLink graph which a data provider is aware is a relation for a local resources.  
+#### Examples
 
-The results of this are then parsed and presented to the user in a place and manner
-defined by the data host.  So it can be done in a manner best for the audience.  
+Examples of remote pages implementing GeoLink web components.  You can do a view source on these pages to see how the components are called.  
+
+* http://glcomponents.tech/catalogue.html 
+* http://opencoredata.org/doc/resource/people/v1/078d82ba-21df-11e6-8725-c8bcc89d1645
+* http://www.bco-dmo.org/deployment/616332?geolink=ecah2016
+
+#### Further information
+The following PDF provides a visual flow of how the GeoLink graph is created by a community and then implemented by web architecture approaches. These approaches enable multiple provides to place GeoLink into their web pages and applications with nothing more than simple HTML5 approaches.
+
+http://glcomponents.tech/GeoLinkWebComponents.pdf

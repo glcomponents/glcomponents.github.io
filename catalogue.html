@@ -35,17 +35,18 @@
                 <a class="mdl-navigation__link" href="./catalogue.html">Index of Components</a>
                 <a class="mdl-navigation__link" href="./glperson.html">Comp: Person</a>
                 <a class="mdl-navigation__link" href="./glpersonol.html">Comp: Person Overlay</a>
-                <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>                
+                <a class="mdl-navigation__link" href="./dataset.html">Comp: Datasets</a>
                 <a class="mdl-navigation__link" href="./leaflet.html">Comp: Leaflet Polygon</a>
                 <a class="mdl-navigation__link" href="./leafletgeojson.html">Comp: Leaflet IODP call</a>
                 <a class="mdl-navigation__link" href="./ocdsearch.html">Comp: OCD Search</a>
+                <a class="mdl-navigation__link" href="./deepdive.html">Deep Dive</a>
             </nav>
         </div>
         <main class="mdl-layout__content">
             <div class="page-content">
                 <div class="mdl-grid">
                     <div class="mdl-cell mdl-cell--6-col">
-                                                <h3>Introduction</h3>
+                        <h3>Introduction</h3>
 
                         <p>
                             This catalog contains components that either directly use or could use GeoLink graph resources and relations. The intent is to provide a simply method by which pages can include components which leverage GeoLink.
@@ -60,48 +61,51 @@
                         </p>
 
 
-<p>
-    First a couple line are needed to include the element itself as well as a polyfill 
-    library  to enable support in older browsers.  Many modern browsers do not require a
-    polyfill and this .js is ignored by the browser.
-    </p>
-    
+                        <p>
+                            First a couple line are needed to include the element itself as well as a polyfill library to enable support in older browsers. Many modern browsers do not require a polyfill and this .js is ignored by the browser.
+                        </p>
 
-<p>
-    Next the element itself is referenced and used in the HTML of the page following the 
-    patterns of the component itself.  Parameters and values can be passed to the component
-    for use in obtaining remote data.   Note remote services will need to allow cross
-    origin scripting (CORS).
-    </p>
 
-     <!-- HTML generated using hilite.me --><div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><table><tr><td><pre style="margin: 0; line-height: 125%">1
+                        <p>
+                            Next the element itself is referenced and used in the HTML of the page following the patterns of the component itself. Parameters and values can be passed to the component for use in obtaining remote data. Note remote services will need to allow cross
+                            origin scripting (CORS).
+                        </p>
+
+                        <!-- HTML generated using hilite.me -->
+                        <div style="background: #f8f8f8; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                            <table>
+                                <tr>
+                                    <td><pre style="margin: 0; line-height: 125%">1
 2
 3
 4
 5
-6</pre></td><td><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">&lt;!--</span> GeoLink Web component include and polyfill <span style="color: #666666">--&gt;</span>
+6</pre></td>
+                                    <td><pre style="margin: 0; line-height: 125%"><span style="color: #408080; font-style: italic">&lt;!--</span> GeoLink Web component include and polyfill <span style="color: #666666">--&gt;</span>
 <span style="color: #666666">&lt;</span>script src<span style="color: #666666">=</span><span style="color: #BA2121">&quot;http://glcomponents.tech/components/glperson-element/bower_components/webcomponentsjs/webcomponents-lite.js&quot;</span><span style="color: #666666">&gt;</span>
 <span style="color: #666666">&lt;</span>link rel<span style="color: #666666">=</span><span style="color: #BA2121">&quot;import&quot;</span> href<span style="color: #666666">=</span><span style="color: #BA2121">&quot;http://glcomponents.tech/components/glperson-element/glperson-element.html&quot;</span><span style="color: #666666">&gt;</span>
 
 <span style="color: #408080; font-style: italic">&lt;!--</span> GeoLink component call <span style="color: #666666">--&gt;</span>
 <span style="color: #666666">&lt;</span>glperson<span style="color: #666666">-</span>element params<span style="color: #666666">=</span><span style="color: #BA2121">&#39;{&quot;host&quot;: &quot;GeoLink&quot;, &quot;hosturl&quot;:&quot;http://geolink.org&quot;, &quot;url&quot;: &quot;http://opencoredata.org/id/resource/people/v1/078d82ba-21df-11e6-8725-c8bcc89d1645&quot;}&#39;</span><span style="color: #666666">/&gt;</span>
-</pre></td></tr></table></div>
-                  
-        
+</pre></td>
+                                </tr>
+                            </table>
+                        </div>
 
 
-                      
+
+
+
 
                     </div>
                     <div class="mdl-cell mdl-cell--6-col">
                         <h3>Your web site is the interface</h3>
- <p>
-     The following PDF provides a visual flow of how the GeoLink graph is created by a community and then implemented 
-     by web architecture approaches.  These approaches enable multiple provides to place GeoLink into their web pages and 
-     applications with nothing more than simple HTML5 appraoches. 
-                                  </p>
+                        <p>
+                            The following PDF provides a visual flow of how the GeoLink graph is created by a community and then implemented by web architecture approaches. These approaches enable multiple provides to place GeoLink into their web pages and applications with nothing
+                            more than simple HTML5 appraoches.
+                        </p>
 
-                 <a href="./GeoLinkWebComponents.pdf">  <img src="./images/glwc_icon.png"></a>
+                        <a href="./GeoLinkWebComponents.pdf"> <img src="./images/glwc_icon.png"></a>
 
 
                         <p style="margin-top:40px">Examples of remote pages implementing GeoLink web components</p>
