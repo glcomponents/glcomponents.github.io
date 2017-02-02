@@ -28,7 +28,7 @@ Next the element itself is referenced and used in the HTML of the page following
 
 Examples of remote pages implementing GeoLink web components.  You can do a view source on these pages to see how the components are called.  
 
-* http://glcomponents.tech/catalogue.html 
+* http://glcomponents.tech/index.html 
 * http://opencoredata.org/doc/resource/people/v1/078d82ba-21df-11e6-8725-c8bcc89d1645
 * http://www.bco-dmo.org/deployment/616332?geolink=ecah2016
 
