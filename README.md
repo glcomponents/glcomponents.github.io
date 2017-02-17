@@ -36,3 +36,4 @@ Examples of remote pages implementing GeoLink web components.  You can do a view
 The following PDF provides a visual flow of how the GeoLink graph is created by a community and then implemented by web architecture approaches. These approaches enable multiple provides to place GeoLink into their web pages and applications with nothing more than simple HTML5 approaches.
 
 http://glcomponents.tech/GeoLinkWebComponents.pdf
+
