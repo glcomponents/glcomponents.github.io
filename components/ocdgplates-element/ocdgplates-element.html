@@ -39,74 +39,13 @@ Example:
     </style>
 
     <template>
-     <div class="container-fluid"  style="margin:10px;border:2px solid black">      
+     <div class="container-fluid"  style="margin:10px;border:2px solid black">   
+
+<p>
+         Map for age: {{age}}
+</p>
             <div id="map"></div>
-<script type="text/javascript">
 
- var crs = new L.Proj.CRS('ESRI:53009', '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs', {
-                resolutions: [65536, 32768, 16384, 8192, 4096, 2048]
-            });
-
-            var map = L.map('map', {
-                crs: crs,
-                maxZoom: 5
-            });
-
-            L.graticule({
-                sphere: true,
-                style: {
-                    color: '#777',
-                    opacity: 1,
-                    fillColor: '#ccf',
-                    fillOpacity: 1,
-                    weight: 2
-                }
-            }).addTo(map);
-
-            L.graticule({
-                style: {
-                    color: '#777',
-                    weight: 1,
-                    opacity: 0.5
-                }
-            }).addTo(map);
-
-            var url = "https://gws.gplates.org/reconstruct/coastlines/?time=140";
-
-            var xhr = new XMLHttpRequest();
-            if ("withCredentials" in xhr) {
-                xhr.open("GET", url, true);
-            } else if (typeof XDomainRequest != "undefined") {
-                xhr = new XDomainRequest();
-                xhr.open("GET", url);
-            } else {
-                xhr = null;
-            }
-
-            if (!xhr) {
-                document.getElementById("info").innerHTML = "your web browser supports CORS?";
-            } else {
-                xhr.onload = function() {
-                    var geojs = JSON.parse(xhr.response);
-
-                    L.geoJson(geojs, {
-                        style: {
-                            color: '#000',
-                            weight: 0.5,
-                            opacity: 1,
-                            fillColor: '#fff',
-                            fillOpacity: 1
-                        }
-                    }).addTo(map);
-
-                    map.fitWorld();
-                };
-                xhr.onerror = function() {
-                    document.getElementById("info").innerHTML = "Something went wrong";
-                };
-                xhr.send();
-            }
-</script>
 
     </div>
     </template>
@@ -123,6 +62,8 @@ Example:
              * while checking its pocket watch.
              */
             fancy: Boolean,
+
+            age: String,
 
             /**
              * Describes the author of the element, but is really just an excuse to
@@ -160,7 +101,71 @@ Example:
             //
             // This is the point where you should make modifications to the DOM (when
             // necessary), or kick off any processes the element wants to perform.
+
             // Sphere Mollweide: http://spatialreference.org/ref/esri/53009/
+            var crs = new L.Proj.CRS('ESRI:53009', '+proj=moll +lon_0=0 +x_0=0 +y_0=0 +a=6371000 +b=6371000 +units=m +no_defs', {
+                resolutions: [65536, 32768, 16384, 8192, 4096, 2048]
+            });
+
+            var map = L.map('map', {
+                crs: crs,
+                maxZoom: 5
+            });
+
+            L.graticule({
+                sphere: true,
+                style: {
+                    color: '#777',
+                    opacity: 1,
+                    fillColor: '#ccf',
+                    fillOpacity: 1,
+                    weight: 2
+                }
+            }).addTo(map);
+
+            L.graticule({
+                style: {
+                    color: '#777',
+                    weight: 1,
+                    opacity: 0.5
+                }
+            }).addTo(map);
+
+            var url = "https://gws.gplates.org/reconstruct/coastlines/?time=" + this.age;
+
+            var xhr = new XMLHttpRequest();
+            if ("withCredentials" in xhr) {
+                xhr.open("GET", url, true);
+            } else if (typeof XDomainRequest != "undefined") {
+                xhr = new XDomainRequest();
+                xhr.open("GET", url);
+            } else {
+                xhr = null;
+            }
+
+            if (!xhr) {
+                document.getElementById("info").innerHTML = "your web browser supports CORS?";
+            } else {
+                xhr.onload = function() {
+                    var geojs = JSON.parse(xhr.response);
+
+                    L.geoJson(geojs, {
+                        style: {
+                            color: '#000',
+                            weight: 0.5,
+                            opacity: 1,
+                            fillColor: '#fff',
+                            fillOpacity: 1
+                        }
+                    }).addTo(map);
+
+                    map.fitWorld();
+                };
+                xhr.onerror = function() {
+                    document.getElementById("info").innerHTML = "Something went wrong";
+                };
+                xhr.send();
+            }
 
 
         },
@@ -172,6 +177,11 @@ Example:
             // This is a good place to perform any work related to your element's
             // visual state or active behavior (measuring sizes, beginning animations,
             // loading resources, etc).
+
+
+
+
+
         },
 
         detached: function() {
@@ -201,11 +211,6 @@ Example:
             return 'ocdgplates-element says, ' + response;
         },
 
-
-        callUnique: function(value) {
-            var response = value + "test" || 'No Value Provided';
-            return 'GL Resource: ' + response;
-        },
 
 
     });

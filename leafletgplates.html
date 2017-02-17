@@ -62,50 +62,43 @@
         <main class="mdl-layout__content">
             <div class="page-content">
 
-                <div class="mdl-cell mdl-cell--6-col">
+                <div class="mdl-cell mdl-cell--12-col">
                     <p>
-                        Testing to see if I could use the Gplates services in leaflet component.
+                        This is a test to build up a simple web component for the Gplates web service. By building this as a component it is far easier for people to simply include a call to the service and display a map.
                     </p>
+
+                    <p>Next step will be to call the point reprojection service to place points on the map associated with features of interest. For IODP this will be a cruise path projected back to the known basement age of the expedition.
+                    </p>
+                </div>
+
+                <div class="mdl-cell mdl-cell--12-col">
+                    <p>The code required to include this into a page by a author is:</p>
+
+
+                    <div style="margin-left: 50px">
+                        <span>Head</span><br>
+                        <code>
+                 &lt;script src=&quot;&#x2F;components&#x2F;leaflet-element&#x2F;bower_components&#x2F;webcomponentsjs&#x2F;webcomponents-lite.js&quot;&gt;&lt;&#x2F;script&gt;
+                        </code><br>
+                        <code>
+                 &lt;link rel=&quot;import&quot; href=&quot;&#x2F;components&#x2F;ocdgplates-element&#x2F;ocdgplates-element.html&quot;&gt;
+                    </code>
+                    </div>
+
+
+                    <div style="margin-left: 50px; margin-top: 25px">
+                        <span>Body</span><br>
+                        <code>
+                           &lt;ocdgplates-element age=&quot;140&quot;&gt;&lt;&#x2F;ocdgplates-element&gt;
+                    </code>
+                    </div>
                 </div>
 
 
 
                 <div style="margin:100px;height:300px;width:650px">
-                    <ocdgplates-element params='{"age": "40"}'></ocdgplates-element>
+                    <ocdgplates-element age="140" params='{"age": "40"}'></ocdgplates-element>
                 </div>
-
-
-
-                <!-- HTML generated using hilite.me -->
-                <div class="mdl-cell mdl-cell--12-col">
-
-                    <div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-                        <table>
-                            <tr>
-                                <td><pre style="margin: 0; line-height: 125%">1
-2
-3
-4
-5
-6
-7
-8
-9</pre></td>
-                                <td><pre style="margin: 0; line-height: 125%"> <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-map</span> <span style="color: #0000CC">latitude=</span><span style="background-color: #fff0f0">&quot;16.5&quot;</span> <span style="color: #0000CC">longitude=</span><span style="background-color: #fff0f0">&quot;-80&quot;</span> <span style="color: #0000CC">zoom=</span><span style="background-color: #fff0f0">&quot;3&quot;</span><span style="color: #007700">&gt;</span>
-        <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-tilelayer</span> <span style="color: #0000CC">url=</span><span style="background-color: #fff0f0">&quot;https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}&quot;</span> <span style="color: #0000CC">max-zoom=</span><span style="background-color: #fff0f0">&quot;13&quot;</span><span style="color: #007700">&gt;</span>
-                            Tiles <span style="color: #880000; font-weight: bold">&amp;copy;</span> Esri <span style="color: #880000; font-weight: bold">&amp;mdash;</span> Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri
-        <span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-tilelayer&gt;
-        <span style="color: #007700">&lt;template</span> <span style="color: #0000CC">is=</span><span style="background-color: #fff0f0">&quot;dom-bind&quot;</span><span style="color: #007700">&gt;</span>
-            <span style="color: #007700">&lt;iron</span><span style="color: #0000CC">-ajax</span> <span style="color: #0000CC">url=</span><span style="background-color: #fff0f0">&quot;http://opencoredata.org/api/v1/spatial/expedition/165&quot;</span> <span style="color: #0000CC">auto</span> <span style="color: #0000CC">last-response=</span><span style="background-color: #fff0f0">&quot;{{data}}&quot;</span><span style="color: #007700">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/iron-ajax&gt;
-            <span style="color: #007700">&lt;leaflet</span><span style="color: #0000CC">-geojson</span> <span style="color: #0000CC">color=</span><span style="background-color: #fff0f0">&quot;#FF0000&quot;</span> <span style="color: #0000CC">data=</span><span style="background-color: #fff0f0">&quot;[[data]]&quot;</span><span style="color: #007700">&gt;</span><span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-geojson&gt;
-        <span style="color: #007700">&lt;/template&gt;</span>
-<span style="color: #FF0000; background-color: #FFAAAA">&lt;</span>/leaflet-map&gt;
-</pre></td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-
 
 
             </div>
