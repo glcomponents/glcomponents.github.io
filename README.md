@@ -1,4 +1,4 @@
-# GeoLink Web Components
+# GeoComponents  
 
 ## Intro
 
