@@ -28,12 +28,12 @@ Next the element itself is referenced and used in the HTML of the page following
 
 Examples of remote pages implementing GeoLink web components.  You can do a view source on these pages to see how the components are called.  
 
-* http://glcomponents.tech/index.html 
+* http://geocomponents.org/index.html 
 * http://opencoredata.org/doc/resource/people/v1/078d82ba-21df-11e6-8725-c8bcc89d1645
 * http://www.bco-dmo.org/deployment/616332?geolink=ecah2016
 
 #### Further information
 The following PDF provides a visual flow of how the GeoLink graph is created by a community and then implemented by web architecture approaches. These approaches enable multiple provides to place GeoLink into their web pages and applications with nothing more than simple HTML5 approaches.
 
-http://glcomponents.tech/GeoLinkWebComponents.pdf
+http://geocomponents.org/GeoLinkWebComponents.pdf
 
