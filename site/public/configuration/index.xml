@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Configuration on GeoComponents</title>
-    <link>https://fils.github.io/configuration/</link>
+    <link>/configuration/</link>
     <description>Recent content in Configuration on GeoComponents</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>CC0</copyright>
     
-	<atom:link href="https://fils.github.io/configuration/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/configuration/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
