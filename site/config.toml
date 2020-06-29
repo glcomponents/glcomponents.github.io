@@ -1,0 +1,69 @@
+baseurl = "https://fils.github.io/"
+languageCode = "en-us"
+title = "GeoComponents"
+theme = "ace-documentation-1.0.4"
+paginate = 2
+Copyright = "CC0"
+canonifyurls = true
+
+
+[params]
+description = "Doug Fils"
+authorlocation = "authorlocation"
+cover = "images/cover.png"
+## save the image you want to use as background picture in directory "./static/images"author = "author name"(delete this line when editing)
+logo = "images/logo.png"
+## save the image you want to use as website logo in directory "./static/images"(delete this line when editing)
+githubName = "fils"
+email = "dfils@oceanleadership.org"
+hideHUGOSupport = false
+ordersectionsby = "weight" # ordersectionsby = "title"
+disableSearch = false # default is false
+disableReadmoreNav = false # set true to hide prev/next navigation, default is false
+highlightClientSide = false # set true to use highlight.pack.js instead of the default hugo chroma highlighter
+menushortcutsnewtab = true # set true to open shortcuts links to a new tab/window
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[outputs]
+home = [ "HTML", "RSS", "JSON"]
+
+
+[[menu.shortcuts]]
+name = "<i class='fab fa-github'></i>"
+url = "https://github.com/vantagedesign/ace-documentation"
+weight = 2
+
+
+
+[[menu.main]]  # here are the buttons on the menu
+name = "Home" # Button will display as "Home"
+weight = 100 # the weight decides the position of the button (higher or lower)
+identifier = "home"
+pre = "<br />"
+url = "/"
+
+[[menu.main]]
+name = "Contact"
+weight = 0
+identifier = "contact" # this button will refer to a markdown file named "contact" in the content folder
+pre = "<br />"
+url = "/contact"
+
+[[menu.main]]
+name = "Blog"
+identifier = "blog" # this page will refer to a markdown file named "blog" in the content folder
+pre = "<br />"
+url = "/post"
+weight = 40
+
+[permalinks]
+post = "/:slug/"
+
+[sitemap]
+ChangeFreq = ""
+Filename = "sitemap.xml"
+Priority = "-1"

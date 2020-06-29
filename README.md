@@ -37,3 +37,8 @@ The following PDF provides a visual flow of how the GeoLink graph is created by 
 
 http://geocomponents.org/GeoLinkWebComponents.pdf
 
+
+#### References
+
+* https://dev.to/thepassle/announcing-open-web-components-5h7
+
