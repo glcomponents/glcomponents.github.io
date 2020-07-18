@@ -116,11 +116,23 @@ I&amp;#39;m important  Be sure to read me, I might have important information fo
     
     <item>
       <title>About</title>
-      <link>/test/about/</link>
+      <link>/catalogue/about/</link>
       <pubDate>Sun, 28 Jun 2020 06:37:15 -0500</pubDate>
       
-      <guid>/test/about/</guid>
+      <guid>/catalogue/about/</guid>
       <description>about details detail about this</description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>/catalogue/demo/</link>
+      <pubDate>Sun, 28 Jun 2020 06:37:15 -0500</pubDate>
+      
+      <guid>/catalogue/demo/</guid>
+      <description>About Demonstrate various code insertion approaches.
+ Demo 1: code is inline in the Markdown Demo 2: code is called from GitHub via JS Demo 3: code is from the local files in the repository pull  I then push this to Google Cloud Storage and it is served via GROW
+Demo 1 This is a demo where the code is inline with the markdown
+Copy   { &amp;#34;@context&amp;#34;: { &amp;#34;@vocab&amp;#34;: &amp;#34;http://schema.</description>
     </item>
     
     <item>

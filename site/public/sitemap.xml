@@ -3,11 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/shortcodes/alerts/</loc>
+    <loc>/catalogue/</loc>
+    <lastmod>2020-06-28T06:37:15-05:00</lastmod>
   </url>
   
   <url>
-    <loc>/getting-started/</loc>
+    <loc>/shortcodes/alerts/</loc>
   </url>
   
   <url>
@@ -55,7 +56,12 @@
   </url>
   
   <url>
-    <loc>/test/about/</loc>
+    <loc>/catalogue/about/</loc>
+    <lastmod>2020-06-28T06:37:15-05:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/catalogue/demo/</loc>
     <lastmod>2020-06-28T06:37:15-05:00</lastmod>
   </url>
   
@@ -65,12 +71,11 @@
   </url>
   
   <url>
-    <loc>/test/</loc>
-    <lastmod>2020-06-28T06:37:15-05:00</lastmod>
+    <loc>/categories/</loc>
   </url>
   
   <url>
-    <loc>/categories/</loc>
+    <loc>/getting-started/</loc>
   </url>
   
   <url>

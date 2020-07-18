@@ -1,17 +1,17 @@
 [
 {
+	"uri": "/catalogue/",
+	"title": "Catalogue",
+	"tags": [],
+	"description": "",
+	"content": "A collection of geoinformatics related components and custome elements Available Components Information on the avilable components and how to use them\n"
+},
+{
 	"uri": "/shortcodes/alerts/",
 	"title": "Alerts",
 	"tags": [],
 	"description": "",
 	"content": "The alerts shortcode allows you to let information stand out by means of an alert styled box. This can be used to indicate danger, warning, success or info.\n I\u0026rsquo;m a danger alert  I\u0026rsquo;m a warning alert  I\u0026rsquo;m a success alert  I\u0026rsquo;m an info alert  Usage Place the following shortcode on the page Copy   {{\u0026lt; alert style=\u0026#34;STYLE\u0026#34; \u0026gt;}} [content] {{\u0026lt; /alert \u0026gt;}}    Parameters Style The style parameter is directly applied to the alert as a class in the format \u0026ldquo;alert-{STYLE}\u0026quot;. Bootstrap comes with four styles that can be used with this:\n danger warning success info  "
-},
-{
-	"uri": "/getting-started/",
-	"title": "Getting started",
-	"tags": [],
-	"description": "",
-	"content": "Get started with Ace docs, the easy way to generate a static website for your project\u0026rsquo;s documentation. Installation and configuration is easy and can be easily applied to any project. No need to be dependent on Python, Ruby or Java. Hugo runs from a simple binary and works through the command line. Explore the following pages to learn how to build awesome documentation for your project using Ace.\nInstallation   Usage    "
 },
 {
 	"uri": "/getting-started/installation/",
@@ -91,25 +91,25 @@
 	"content": "Draw your visitor\u0026rsquo;s attention by separating information from the rest of the page using a panel. Convey meaning to this information by using colors implying danger, warning, success or info in a similar fashion as alerts.\nI\u0026#39;m important  Be sure to read me, I might have important information for you.    Usage Simply place the following shortcode on the page Copy   {{\u0026lt; panel title=\u0026#34;TITLE\u0026#34; style=\u0026#34;STYLE\u0026#34; \u0026gt;}} [content] {{\u0026lt; /panel \u0026gt;}}    Parameters Style The style parameter is directly applied to the alert as a class in the format \u0026ldquo;border-{STYLE}\u0026quot;. Bootstrap comes with a variety of styles that can be used with this:\n primary secondary danger warning success info Example: style=\u0026quot;danger\u0026quot;.  Title The title paramter defines the text shown as a title in the panel. It will have the same color as the style.\nExample: title=\u0026quot;I\u0026rsquo;m important\u0026quot;.\n"
 },
 {
-	"uri": "/test/about/",
+	"uri": "/catalogue/about/",
 	"title": "About",
 	"tags": [],
 	"description": "",
 	"content": "about details detail about this\n"
 },
 {
+	"uri": "/catalogue/demo/",
+	"title": "Demo",
+	"tags": [],
+	"description": "",
+	"content": "About Demonstrate various code insertion approaches.\n Demo 1: code is inline in the Markdown Demo 2: code is called from GitHub via JS Demo 3: code is from the local files in the repository pull  I then push this to Google Cloud Storage and it is served via GROW\nDemo 1 This is a demo where the code is inline with the markdown\nCopy   { \u0026#34;@context\u0026#34;: { \u0026#34;@vocab\u0026#34;: \u0026#34;http://schema.org/\u0026#34; }, \u0026#34;@id\u0026#34;: \u0026#34;http://example.org/ns#Bob\u0026#34;, \u0026#34;@type\u0026#34;: \u0026#34;Person\u0026#34;, \u0026#34;givenName\u0026#34;: \u0026#34;Robert\u0026#34;, \u0026#34;familyName\u0026#34;: \u0026#34;Junior\u0026#34;, \u0026#34;birthDate\u0026#34;: \u0026#34;1971-07-07\u0026#34;, \u0026#34;deathDate\u0026#34;: \u0026#34;1968-09-10\u0026#34;, \u0026#34;address\u0026#34;: { \u0026#34;@id\u0026#34;: \u0026#34;http://example.org/ns#BobsAddress\u0026#34;, \u0026#34;streetAddress\u0026#34;: \u0026#34;1600 Amphitheatre Pkway\u0026#34;, \u0026#34;postalCode\u0026#34;: 9404 } }    Demo 2 This is code pulled from GitHub via a JS call. The code highlighting is not working on this one. Not sure why, will investigate later.\n  axios({ method: 'get', url: 'https://raw.githubusercontent.com/ESIPFed/science-on-schema.org/master/examples/dataset/minimal.jsonld' }) .then(function (response) { document.getElementById(\"code-element\").innerText = JSON.stringify(response.data, null, 2); });     Demo 3 This is code from a file during the Hugo build. So in the repo this would come from relative links to the example documentation. The work flow would be simply; sycn the repo, hugo build, sync to object store\nCopy   @prefix dash: \u0026lt;http://datashapes.org/dash#\u0026gt; . @prefix rdf: \u0026lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#\u0026gt; . @prefix rdfs: \u0026lt;http://www.w3.org/2000/01/rdf-schema#\u0026gt; . @prefix schema: \u0026lt;http://schema.org/\u0026gt; . @prefix sh: \u0026lt;http://www.w3.org/ns/shacl#\u0026gt; . @prefix xsd: \u0026lt;http://www.w3.org/2001/XMLSchema#\u0026gt; . schema:PersonShape a sh:NodeShape ; sh:targetClass schema:Person ; sh:property [ sh:path schema:givenName ; sh:datatype xsd:string ; sh:name \u0026#34;given name\u0026#34; ; ] ; sh:property [ sh:path schema:birthDate ; sh:lessThan schema:deathDate ; sh:maxCount 1 ; ] ; sh:property [ sh:path schema:gender ; sh:in ( \u0026#34;female\u0026#34; \u0026#34;male\u0026#34; ) ; ] ; sh:property [ sh:path schema:address ; sh:node schema:AddressShape ; ] . schema:AddressShape a sh:NodeShape ; sh:closed true ; sh:property [ sh:path schema:streetAddress ; sh:datatype xsd:string ; ] ; sh:property [ sh:path schema:postalCode ; sh:or ( [ sh:datatype xsd:string ] [ sh:datatype xsd:integer ] ) ; sh:minInclusive 10000 ; sh:maxInclusive 99999 ; ] .    "
+},
+{
 	"uri": "/",
 	"title": "GeoComponents",
 	"tags": [],
 	"description": "A collection of web components supporint geoinformatics work",
-	"content": "Ace is a theme for Hugo, a fast static website generator written in Go, that allows you to easily write well organized and clean documentation for your projects. It\u0026rsquo;s as easy as writing your content in Markdown, running Hugo to generate static HTML, CSS and Javascript files and deploying those to your web server. Features   Fast.  Static files generated in less than a second. And served to your visitors just as fast.      Minimalistic.  A clean look to keep your user's attention to the content that matters: your documentation.      For every project.  Hugo does not require Java, Python or Ruby and is available as a simple binary or through NPM and other package managers.      Automatic.  Folders and files are automatically added in the menu depending on your file and folder structure.      Full search.  Easily find the content you look for through the search function.      Code hightlighting.  Code highlighting. Include code samples with a copy button. If it’s HTML, you can also render the code.      Useful shortcodes.  Code, buttons, alerts, leads, collapse, panels, images, videos and more.      Built with Bootstrap.  Built with Bootstrap 4. Fully responsive out of the box. Build and style page elements using Bootstrap.      Icons.  Packed with Font Awesome. Empower your content with a shit ton of awesome icons.     "
-},
-{
-	"uri": "/test/",
-	"title": "Test Section",
-	"tags": [],
-	"description": "",
-	"content": "test index this is the test index\n"
+	"content": "GeoComponents is a collection of web components and custom elements used to support various geoinformation projects. The geocomponents.org acts as a reliable host for the components to encourage sharing and reuse. Features   Fast.  Static files served from Google Cloud.      Minimalistic.  Simple custome elements built on pure JS (ECAMScript 6)      For every project.  Served over https and open for inclusion in any domain.     "
 },
 {
 	"uri": "/categories/",
@@ -117,6 +117,13 @@
 	"tags": [],
 	"description": "",
 	"content": ""
+},
+{
+	"uri": "/getting-started/",
+	"title": "Getting started",
+	"tags": [],
+	"description": "",
+	"content": "Get started with Ace docs, the easy way to generate a static website for your project\u0026rsquo;s documentation. Installation and configuration is easy and can be easily applied to any project. No need to be dependent on Python, Ruby or Java. Hugo runs from a simple binary and works through the command line. Explore the following pages to learn how to build awesome documentation for your project using Ace.\nInstallation   Usage    "
 },
 {
 	"uri": "/shortcodes/table/",

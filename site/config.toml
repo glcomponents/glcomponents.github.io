@@ -1,4 +1,4 @@
-##baseurl = "https://fils.github.io/"
+baseurl = "/"
 languageCode = "en-us"
 title = "GeoComponents"
 theme = "ace-documentation-1.0.4"
@@ -31,13 +31,10 @@ menushortcutsnewtab = true # set true to open shortcuts links to a new tab/windo
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
-
 [[menu.shortcuts]]
 name = "<i class='fab fa-github'></i>"
-url = "https://github.com/vantagedesign/ace-documentation"
+url = "https://github.com/geocomponents"
 weight = 2
-
-
 
 [[menu.main]]  # here are the buttons on the menu
 name = "Home" # Button will display as "Home"

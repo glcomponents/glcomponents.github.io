@@ -1,7 +1,6 @@
 +++
 title = "Getting started"
 description = ""
-weight = 1
 +++
 
 {{< lead >}}

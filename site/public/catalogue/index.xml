@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Catalogue on GeoComponents</title>
+    <link>/catalogue/</link>
+    <description>Recent content in Catalogue on GeoComponents</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>CC0</copyright>
+    <lastBuildDate>Sun, 28 Jun 2020 06:37:15 -0500</lastBuildDate>
+    
+	<atom:link href="/catalogue/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>About</title>
+      <link>/catalogue/about/</link>
+      <pubDate>Sun, 28 Jun 2020 06:37:15 -0500</pubDate>
+      
+      <guid>/catalogue/about/</guid>
+      <description>about details detail about this</description>
+    </item>
+    
+    <item>
+      <title>Demo</title>
+      <link>/catalogue/demo/</link>
+      <pubDate>Sun, 28 Jun 2020 06:37:15 -0500</pubDate>
+      
+      <guid>/catalogue/demo/</guid>
+      <description>About Demonstrate various code insertion approaches.
+ Demo 1: code is inline in the Markdown Demo 2: code is called from GitHub via JS Demo 3: code is from the local files in the repository pull  I then push this to Google Cloud Storage and it is served via GROW
+Demo 1 This is a demo where the code is inline with the markdown
+Copy   { &amp;#34;@context&amp;#34;: { &amp;#34;@vocab&amp;#34;: &amp;#34;http://schema.</description>
+    </item>
+    
+  </channel>
+</rss>
