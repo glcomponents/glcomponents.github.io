@@ -2,4 +2,4 @@
 .vscode/**/*
 .floo
 .flooignore
-./scripts/**/*
+**/secret/
